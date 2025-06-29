@@ -37,5 +37,26 @@ namespace inventoryProject
         {
 
         }
+
+        private void insertBtn_Click(object sender, EventArgs e)
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("insert into inventory values ('"+int.Parse(productId.Text)+"','"+(productName.Text)+"','"+(productType.Text)+"','"+(productQuantity.Text)+"' , '"+(productColour.Text)+"' , '"+(productDate.Text)+"')" , connection);
+            //Sql query should be a string
+            try
+            {
+                command.ExecuteNonQuery();
+                MessageBox.Show("Product Inserted Successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            
+            
+            connection.Close();
+            
+
+        }
     }
 }

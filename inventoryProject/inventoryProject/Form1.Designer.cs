@@ -167,6 +167,7 @@
             // 
             // productDate
             // 
+            this.productDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.productDate.Location = new System.Drawing.Point(579, 168);
             this.productDate.Name = "productDate";
             this.productDate.Size = new System.Drawing.Size(188, 20);
@@ -188,6 +189,7 @@
             this.insertBtn.TabIndex = 14;
             this.insertBtn.Text = "Insert";
             this.insertBtn.UseVisualStyleBackColor = true;
+            this.insertBtn.Click += new System.EventHandler(this.insertBtn_Click);
             // 
             // updateBtn
             // 
