@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace inventoryProject
         {
             InitializeComponent();
         }
-
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1U6OUD2;Initial Catalog=inventory_DB;Integrated Security=True;TrustServerCertificate=True");
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -28,6 +29,11 @@ namespace inventoryProject
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
