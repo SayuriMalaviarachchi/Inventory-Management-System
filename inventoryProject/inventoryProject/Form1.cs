@@ -35,7 +35,17 @@ namespace inventoryProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            BindData();
 
+        }
+        void BindData()
+        {
+           
+            SqlCommand command = new SqlCommand("select * from inventory",connection); 
+            SqlDataAdapter obj = new SqlDataAdapter(command); //SqlDataAdapter is used to fill the DataTable with data from the database
+            DataTable table = new DataTable(); //create empty DataTable
+            obj.Fill(table);
+            dataGridView.DataSource = table;//set the DataSource of the DataGridView
         }
 
         private void insertBtn_Click(object sender, EventArgs e)
@@ -55,7 +65,8 @@ namespace inventoryProject
             
             
             connection.Close();
-            
+            BindData(); // To refresh the view after intering new data(To see the latest changes) 
+
 
         }
     }
