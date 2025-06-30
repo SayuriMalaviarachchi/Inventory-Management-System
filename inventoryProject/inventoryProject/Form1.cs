@@ -69,5 +69,26 @@ namespace inventoryProject
 
 
         }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("update inventory set productName ='" + productName.Text + "',productType ='" + productType.Text + "',productQuantity ='" + productQuantity.Text + "' ,productColour = '" + productColour.Text + "' ,  productDate = '" + productDate.Text + "'" + "where  productId = '" + int.Parse(productId.Text)+"'", connection);
+            //Sql query should be a string
+            try
+            {
+                command.ExecuteNonQuery();
+                MessageBox.Show("Product Updated Successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+
+            connection.Close();
+            BindData(); // To refresh the view after intering new data(To see the latest changes) 
+
+        }
     }
 }
