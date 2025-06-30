@@ -90,5 +90,34 @@ namespace inventoryProject
             BindData(); // To refresh the view after intering new data(To see the latest changes) 
 
         }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (productId.Text != "")
+            {
+                if (MessageBox.Show("Are you sure you want to delete this product?", "Delete Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("delete from inventory where productId = '" + int.Parse(productId.Text) + "'", connection);
+                    //Sql query should be a string
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Product Deleted Successfully");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    connection.Close();
+                    BindData(); // To refresh the view after intering new data(To see the latest changes) 
+                }
+            }
+            else 
+            { 
+                MessageBox.Show("Please enter a Product ID to delete.");
+
+            }
+        }
     }
 }
