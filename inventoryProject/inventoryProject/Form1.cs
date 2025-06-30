@@ -40,8 +40,8 @@ namespace inventoryProject
         }
         void BindData()
         {
-           
-            SqlCommand command = new SqlCommand("select * from inventory",connection); 
+
+            SqlCommand command = new SqlCommand("select * from inventory", connection);
             SqlDataAdapter obj = new SqlDataAdapter(command); //SqlDataAdapter is used to fill the DataTable with data from the database
             DataTable table = new DataTable(); //create empty DataTable
             obj.Fill(table);
@@ -51,7 +51,7 @@ namespace inventoryProject
         private void insertBtn_Click(object sender, EventArgs e)
         {
             connection.Open();
-            SqlCommand command = new SqlCommand("insert into inventory values ('"+int.Parse(productId.Text)+"','"+(productName.Text)+"','"+(productType.Text)+"','"+(productQuantity.Text)+"' , '"+(productColour.Text)+"' , '"+(productDate.Text)+"')" , connection);
+            SqlCommand command = new SqlCommand("insert into inventory values ('" + int.Parse(productId.Text) + "','" + (productName.Text) + "','" + (productType.Text) + "','" + (productQuantity.Text) + "' , '" + (productColour.Text) + "' , '" + (productDate.Text) + "')", connection);
             //Sql query should be a string
             try
             {
@@ -62,8 +62,8 @@ namespace inventoryProject
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            
-            
+
+
             connection.Close();
             BindData(); // To refresh the view after intering new data(To see the latest changes) 
 
@@ -73,7 +73,7 @@ namespace inventoryProject
         private void updateBtn_Click(object sender, EventArgs e)
         {
             connection.Open();
-            SqlCommand command = new SqlCommand("update inventory set productName ='" + productName.Text + "',productType ='" + productType.Text + "',productQuantity ='" + productQuantity.Text + "' ,productColour = '" + productColour.Text + "' ,  productDate = '" + productDate.Text + "'" + "where  productId = '" + int.Parse(productId.Text)+"'", connection);
+            SqlCommand command = new SqlCommand("update inventory set productName ='" + productName.Text + "',productType ='" + productType.Text + "',productQuantity ='" + productQuantity.Text + "' ,productColour = '" + productColour.Text + "' ,  productDate = '" + productDate.Text + "'" + "where  productId = '" + int.Parse(productId.Text) + "'", connection);
             //Sql query should be a string
             try
             {
@@ -113,11 +113,31 @@ namespace inventoryProject
                     BindData(); // To refresh the view after intering new data(To see the latest changes) 
                 }
             }
-            else 
-            { 
+            else
+            {
                 MessageBox.Show("Please enter a Product ID to delete.");
 
             }
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            if (productId.Text != "")
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("select * from inventory where productId = '" + productId.Text + "'", connection);
+                SqlDataAdapter obj = new SqlDataAdapter(command);
+                DataTable table = new DataTable();
+                obj.Fill(table);
+                dataGridView.DataSource = table;
+                connection.Close();
+            }
+            else
+            {
+                BindData();
+                MessageBox.Show("Please enter a Product ID to search.");
+            }
+
         }
     }
 }
